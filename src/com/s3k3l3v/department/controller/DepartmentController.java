@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 public class DepartmentController extends HttpServlet{
 
@@ -56,8 +55,8 @@ public class DepartmentController extends HttpServlet{
 
     private void listBook(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            List<Department> departments = departmentDAO.getAllDepartment();
-            req.setAttribute("listDepartment", departments);
+//            List<Department> departments = departmentDAO.findAllDep();
+//            req.setAttribute("departments", departments);
             RequestDispatcher rb = req.getRequestDispatcher("departmentList.jsp");
             rb.forward(req,resp);
         } catch (ServletException e) {
@@ -71,9 +70,9 @@ public class DepartmentController extends HttpServlet{
     private void insertDepartment(HttpServletRequest req, HttpServletResponse resp) {
         String nameDepartment = req.getParameter("name_department");
         String nameEmployee = req.getParameter("name_employee");
-        int idEmployee = Integer.parseInt(req.getParameter("employee_id"));
+        String idEmployee = req.getParameter("employee_id");
 
-        Department department = new Department(nameDepartment,nameEmployee, idEmployee);
+        Department department = new Department(nameDepartment,nameEmployee, Integer.parseInt(idEmployee));
 
         departmentDAO.insertDepartment(department);
         try {

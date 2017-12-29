@@ -25,7 +25,7 @@
             <th>Price</th>
             <th>Actions</th>
         </tr>
-        <c:forEach var="department" items="${listDepartment}">
+        <c:forEach var="department" items="${departments}">
             <tr>
                 <td><c:out value="${department.departmentId}" /></td>
                 <td><c:out value="${department.nameDepartment}" /></td>
@@ -34,7 +34,8 @@
                 <td>
                     <a href="edit?id=<c:out value='${department.departmentId}' />">Edit</a>
                     &nbsp;&nbsp;
-                    <a href="delete?id=<c:out value='${department.departmentId}' />">Delete</a>                </td>
+                    <a href="delete?id=<c:out value='${department.departmentId}' />">Delete</a>
+                </td>
             </tr>
         </c:forEach>
     </table>

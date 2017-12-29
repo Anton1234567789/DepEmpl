@@ -1,4 +1,4 @@
-x<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
           pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -34,12 +34,12 @@ x<%@ page language="java" contentType="text/html; charset=UTF-8"
                     </h2>
                 </caption>
                 <c:if test="${department != null}">
-                    <input type="hidden" name="id" value="<c:out value='${department.departmentId}' />" />
+                    <input type="hidden" name="departmentId" value="<c:out value='${department.departmentId}' />" />
                 </c:if>
                 <tr>
                     <th>Name: </th>
                     <td>
-                        <input type="text" name="title" size="45"
+                        <input type="text" name="nameDepartment" size="45"
                                value="<c:out value='${department.nameDepartment}' />"
                         />
                     </td>
@@ -47,8 +47,16 @@ x<%@ page language="java" contentType="text/html; charset=UTF-8"
                 <tr>
                     <th>Employee NAme: </th>
                     <td>
-                        <input type="text" name="author" size="45"
+                        <input type="text" name="nameEmployee" size="45"
                                value="<c:out value='${department.nameEmployee}' />"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <th>Employee Id: </th>
+                    <td>
+                        <input type="text" name="employeeId" size="45"
+                               value="<c:out value='${department.employeeId}' />"
                         />
                     </td>
                 </tr>
@@ -57,6 +65,8 @@ x<%@ page language="java" contentType="text/html; charset=UTF-8"
                         <input type="submit" value="Save" />
                     </td>
                 </tr>
+                <a href="${pageContext.request.contextPath}/new">new</a>
+                <a href="${pageContext.request.contextPath}/list">list</a>
             </table>
         </form>
 </div>

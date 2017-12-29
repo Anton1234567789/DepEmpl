@@ -6,19 +6,19 @@ public class Department implements Serializable{
     private int departmentId;
     private String nameDepartment;
     private String nameEmployee;
-    private int employee_id;
+    private int employeeId;
 
-    public Department(int departmentId, String nameDepartment, String nameEmployee, int employee_id) {
+    public Department(int departmentId, String nameDepartment, String nameEmployee, int employeeId) {
         this.departmentId = departmentId;
         this.nameDepartment = nameDepartment;
         this.nameEmployee = nameEmployee;
-        this.employee_id = employee_id;
+        this.employeeId = employeeId;
     }
 
-    public Department(String nameDepartment, String nameEmployee, int employee_id) {
+    public Department(String nameDepartment, String nameEmployee, int employeeId) {
         this.nameDepartment = nameDepartment;
         this.nameEmployee = nameEmployee;
-        this.employee_id = employee_id;
+        this.employeeId = employeeId;
     }
 
     public Department() {
@@ -48,12 +48,12 @@ public class Department implements Serializable{
         this.nameEmployee = nameEmployee;
     }
 
-    public int getEmployee_id() {
-        return employee_id;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class Department implements Serializable{
                 "departmentId=" + departmentId +
                 ", nameDepartment='" + nameDepartment + '\'' +
                 ", nameEmployee='" + nameEmployee + '\'' +
-                ", employee_id=" + employee_id +
+                ", employeeId=" + employeeId +
                 '}';
     }
 }

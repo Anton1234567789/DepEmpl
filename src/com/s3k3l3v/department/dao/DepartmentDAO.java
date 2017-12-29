@@ -28,15 +28,16 @@ public class DepartmentDAO {
 
         try {
             connection = dbManager.getConnection();
-            preparedStatement = connection.prepareStatement(SQL_INSERT_DEPARTMENT);
+            preparedStatement = connection.prepareStatement(SQL_INSERT_DEPARTMENT, PreparedStatement.RETURN_GENERATED_KEYS);
 
             int k = 1;
 
             preparedStatement.setString(k++, department.getNameDepartment());
             preparedStatement.setString(k++, department.getNameEmployee());
-            preparedStatement.setInt(k++, department.getEmployee_id());
+            preparedStatement.setInt(k++, department.getEmployeeId());
 
             if (preparedStatement.executeUpdate() > 0){
+                rs = preparedStatement.getGeneratedKeys();
                 if (rs.next()){
                     department.setDepartmentId(rs.getInt(1));
                     res = true;
@@ -65,28 +66,56 @@ public class DepartmentDAO {
         }
     }
 
-    public List<Department> getAllDepartment(){
+    public Department extractDep(ResultSet resultSet) throws SQLException {
+        Department department = new Department();
+        department.setDepartmentId(resultSet.getInt("department_id"));
+        department.setNameDepartment(resultSet.getString("name_department"));
+        department.setNameEmployee(resultSet.getString("name_employee"));
+        department.setEmployeeId(resultSet.getInt("employee_id"));
+        return department;
+    }
+
+
+    public List<Department> findAllDep() throws SQLException {
         List<Department> departments = new ArrayList<>();
         Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
 
-        try {
+
             connection = dbManager.getConnection();
             statement = connection.createStatement();
             rs = statement.executeQuery(SQL_GET_ALL_DEPARTMENT);
             while (rs.next()){
-                Department department = new Department();
-                department.setDepartmentId(rs.getInt("departments_id"));
-                department.setNameDepartment(rs.getString("name_department"));
-                department.setNameEmployee(rs.getString("name_employee"));
-                department.setEmployee_id(rs.getInt("employee_id"));
+                Department department = extractDep(rs);
                 departments.add(department);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            return departments;
 
-        return departments;
     }
+
+//    public List<Department> getAllDepartment(){
+//        List<Department> departments = new ArrayList<>();
+//        Connection connection = null;
+//        Statement statement = null;
+//        ResultSet rs = null;
+//
+//        try {
+//            connection = dbManager.getConnection();
+//            statement = connection.createStatement();
+//            rs = statement.executeQuery(SQL_GET_ALL_DEPARTMENT);
+//            while (rs.next()){
+//                Department department = new Department();
+//                department.setDepartmentId(rs.getInt("department_id"));
+//                department.setNameDepartment(rs.getString("name_department"));
+//                department.setNameEmployee(rs.getString("name_employee"));
+//                department.setEmployeeId(rs.getInt("employee_id"));
+//                departments.add(department);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return departments;
+//    }
 }
